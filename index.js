@@ -5,20 +5,27 @@ var ps = require('ps-node');
 
 var i=0;
 
-for(i=0;i<10;i++)
+
+
+for(i=0;i<5;i++)
 {
 	ps.lookup({
-	    command: 'sshd',
-	    psargs: 'aux'
-	    }, function(err, resultList ) {
-	    if (err) {
-		throw new Error( err );
-	    }
-	 
-	    resultList.forEach(function( process ){
-		if( process ){
-		    console.log( 'PID: %s, COMMAND: %s, ARGUMENTS: %s', process.pid, process.command, process.arguments );
+	    command: '/usr/sbin/httpd',
+	    psargs: 'aux',
+	    arguments: '-DFOREGROUND'
+	    },function(err) { if (err) {
+        				throw new Error( err );
+    			       }
+   			       else {
+        				console.log(process.pid);
+    			       }
 		}
-	    });
-	});
+)
+
+ 	/*ps.lookup({
+            command: '/usr/sbin/httpd',
+            psargs: 'aux',
+            arguments: '-DFOREGROUND'
+            },console.log)
+	*/	
 }
